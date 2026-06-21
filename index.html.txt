@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архитектурное Портфолио | Проектная Документация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.0/index.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .loader-line {
+            width: 0%;
+            height: 2px;
+            background: #000;
+            animation: loadLine 1.5s ease-in-out forwards;
+        }
+        @keyframes loadLine {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="w-64">
+            <div class="loader-line"></div>
+            <p class="text-xs mt-2 text-gray-500 uppercase tracking-widest text-center">Загрузка проектов...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter uppercase">Arch<span class="text-gray-400">Doc</span>.</a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-wide">
+                <a href="#about" class="hover:text-gray-500 transition-colors">Обо мне</a>
+                <a href="#services" class="hover:text-gray-500 transition-colors">Услуги</a>
+                <a href="#portfolio" class="hover:text-gray-500 transition-colors">Проекты</a>
+                <a href="#contact" class="hover:text-gray-500 transition-colors">Контакты</a>
+            </div>
+
+            <button class="md:hidden text-2xl" onclick="toggleMenu()">☰</button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-6 absolute w-full">
+            <div class="flex flex-col space-y-4 text-lg font-medium">
+                <a href="#about" onclick="toggleMenu()">Обо мне</a>
+                <a href="#services" onclick="toggleMenu()">Услуги</a>
+                <a href="#portfolio" onclick="toggleMenu()">Проекты</a>
+                <a href="#contact" onclick="toggleMenu()">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg" src="" alt="Architecture Background" class="w-full h-full object-cover opacity-90 grayscale brightness-75">
+        </div>
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl fade-in-up">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Точность в каждой линии.<br>Функция в каждом проекте.</h1>
+            <p class="text-xl md:text-2xl font-light text-gray-200 mb-10">Разработка комплексной проектной документации и архитектурных решений.</p>
+            <a href="#portfolio" class="inline-block border border-white px-8 py-3 text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">Смотреть работы</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="fade-in-up">
+                <img id="architect-portrait" src="" alt="Архитектор" class="w-full h-[500px] object-cover grayscale shadow-2xl">
+            </div>
+            <div class="fade-in-up delay-100">
+                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Об архитекторе</h2>
+                <h3 class="text-4xl font-bold mb-6">Создаю документацию, которая строится без ошибок.</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Более 10 лет опыта в проектировании жилых и коммерческих объектов. Моя специализация — детальная проработка узлов, соблюдение всех нормативов (СНиП, ГОСТ) и создание понятной рабочей документации для строительных бригад.
+                </p>
+                <div class="grid grid-cols-2 gap-6 mt-8">
+                    <div>
+                        <span class="block text-3xl font-bold">150+</span>
+                        <span class="text-sm text-gray-500 uppercase">Реализованных проектов</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl font-bold">100%</span>
+                        <span class="text-sm text-gray-500 uppercase">Прохождение экспертизы</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Этапы разработки</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Полный цикл сопровождения проекта от эскиза до ввода в эксплуатацию.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 fade-in-up">
+                    <div class="w-12 h-12 bg-black text-white flex items-center justify-center text-xl font-bold mb-6">01</div>
+                    <h3 class="text-xl font-bold mb-4">Эскизный проект (ЭП)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Разработка концепции, планировочных решений, 3D визуализация экстерьера и интерьера. Согласование внешнего вида.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 fade-in-up delay-100">
+                    <div class="w-12 h-12 bg-black text-white flex items-center justify-center text-xl font-bold mb-6">02</div>
+                    <h3 class="text-xl font-bold mb-4">Проектная документация (ПД)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Разделы АР, КР, ИОС. Подготовка документов для получения разрешения на строительство и прохождения экспертизы.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 fade-in-up delay-200">
+                    <div class="w-12 h-12 bg-black text-white flex items-center justify-center text-xl font-bold mb-6">03</div>
+                    <h3 class="text-xl font-bold mb-4">Рабочая документация (РД)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Детальные чертежи узлов, спецификации материалов, ведомости объемов работ. Полная инструкция для строителей.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12 fade-in-up">
+                <div>
+                    <h2 class="text-4xl font-bold mb-2">Избранные проекты</h2>
+                    <p class="text-gray-500">Жилые комплексы, частные резиденции, общественные здания.</p>
+                </div>
+                <div class="hidden md:block">
+                    <button class="text-sm font-bold uppercase border-b-2 border-black pb-1">Все проекты</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                <!-- Projects will be injected here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+            <div class="fade-in-up">
+                <h2 class="text-4xl font-bold mb-6">Начнем сотрудничество</h2>
+                <p class="text-gray-400 mb-8 text-lg">Готов обсудить ваш проект. Оставьте заявку или свяжитесь со мной напрямую.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">✉️</div>
+                        <span>hello@archdoc.ru</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">📞</div>
+                        <span>+7 (999) 000-00-00</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">📍</div>
+                        <span>Москва, Пресненская наб., 12</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="bg-gray-900 p-8 rounded-lg fade-in-up delay-100" onsubmit="event.preventDefault(); alert('Спасибо! Заявка отправлена.');">
+                <div class="mb-6">
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Ваше имя</label>
+                    <input type="text" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-white transition-colors" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Email</label>
+                    <input type="email" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-white transition-colors" required>
+                </div>
+                <div class="mb-8">
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">О проекте</label>
+                    <textarea rows="4" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-white transition-colors resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-white text-black font-bold uppercase py-4 hover:bg-gray-200 transition-colors">Отправить запрос</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-black text-gray-600 py-8 border-t border-gray-900 text-center text-sm">
+        <p>&copy; 2026 ArchDoc Portfolio. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Data for Portfolio Items
+        const projects = [
+            {
+                title: "ЖК 'Северный Горизонт'",
+                category: "Многоэтажное строительство",
+                desc: "Полный комплект РД для жилого комплекса на 250 квартир.",
+                imagePrompt: "Modern minimalist residential building facade, concrete and glass, cloudy sky, architectural photography, high detail, 8k"
+            },
+            {
+                title: "Частная резиденция 'Лес'",
+                category: "Индивидуальное жилье",
+                desc: "Проект деревянного дома в скандинавском стиле с панорамным остеклением.",
+                imagePrompt: "Luxury wooden house in a pine forest, large windows, warm interior lighting, dusk, architectural visualization, realistic"
+            },
+            {
+                title: "Бизнес-центр 'Куб'",
+                category: "Коммерческая недвижимость",
+                desc: "Реконструкция офисного здания с изменением фасадных решений.",
+                imagePrompt: "Modern office building entrance, geometric shapes, steel and glass structure, urban environment, sunny day, low angle shot"
+            },
+            {
+                title: "Лофт-пространство",
+                category: "Интерьер",
+                desc: "Адаптация промышленного цеха под арт-галерею.",
+                imagePrompt: "Industrial loft interior design, brick walls, high ceilings, exposed pipes, modern furniture, spacious, bright light"
+            },
+            {
+                title: "Загородный клуб",
+                category: "Общественные здания",
+                desc: "Комплекс зданий для отдыха: бассейн, ресторан, гостевые домики.",
+                imagePrompt: "Luxury country club exterior, swimming pool, modern architecture, green lawn, summer day, photorealistic render"
+            },
+            {
+                title: "Таунхаусы 'Парк'",
+                category: "Малоэтажное строительство",
+                desc: "Генплан и рабочая документация квартала таунхаусов.",
+                imagePrompt: "Row of modern townhouses, brick and wood facade, paved street, trees, architectural rendering, clean lines"
+            }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Generate Images
+            const heroBgUrl = await generateImage("Abstract architectural blueprint lines, white lines on dark blue background, technical drawing style, minimalism");
+            document.getElementById('hero-bg').src = heroBgUrl;
+
+            const portraitUrl = await generateImage("Professional architect portrait, man in glasses holding rolled up blueprints, wearing black turtleneck, modern office background, blurred, serious look, high quality");
+            document.getElementById('architect-portrait').src = portraitUrl;
+
+            // Render Portfolio
+            const grid = document.getElementById('portfolio-grid');
+            
+            // Create placeholders first for layout stability
+            projects.forEach((proj, index) => {
+                const card = document.createElement('div');
+                card.className = 'group project-card relative h-80 overflow-hidden cursor-pointer fade-in-up';
+                card.style.animationDelay = `${index * 100}ms`;
+                
+                card.innerHTML = `
+                    <div class="absolute inset-0 bg-gray-200 animate-pulse" id="placeholder-${index}"></div>
+                    <img id="img-${index}" src="" alt="${proj.title}" class="w-full h-full object-cover transition-transform duration-700">
+                    <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs text-gray-400 uppercase tracking-widest mb-2">${proj.category}</span>
+                        <h3 class="text-xl font-bold text-white mb-2">${proj.title}</h3>
+                        <p class="text-sm text-gray-300 line-clamp-2">${proj.desc}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+
+                // Load actual images asynchronously
+                generateImage(proj.imagePrompt).then(url => {
+                    const img = document.getElementById(`img-${index}`);
+                    const placeholder = document.getElementById(`placeholder-${index}`);
+                    img.src = url;
+                    img.onload = () => {
+                        placeholder.remove();
+                    };
+                });
+            });
+
+            // Remove Loader
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }, 1500);
+
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+
+        // Image Generation Helper
+        async function generateImage(prompt) {
+            try {
+                // Using the provided tool interface
+                const response = await window.image_gen({ prompt: prompt + ", architectural style, professional photography, 8k resolution, highly detailed" });
+                return response.url || response; 
+            } catch (e) {
+                console.error("Image generation failed", e);
+                return "https://via.placeholder.com/800x600?text=Loading...";
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('h-20', 'h-16');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('h-16', 'h-20');
+            }
+        });
+
+    </script>
+</body>
+</html>
+
